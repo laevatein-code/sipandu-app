@@ -47,13 +47,14 @@
                 <span class="text-4xl">IPDS</span>
             </div>
             {{-- Menu kontrol new task --}}
-            <div>
+            <div class="flex space-x-2">
                 <button id="addTable" type="button" class="py-2 items-center inline-flex hover:bg-blue-300 bg-blue-500 rounded-md text-center text-slate-100">
                     <span class="ms-3">New task</span>
                     <svg class="w-3.5 h-3.5 mx-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
                      </svg>
                 </button>
+                <button id="simpanData" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">Simpan</button>
             </div>
             <hr class="h-px my-3 dark:bg-black bg-black border-0">
             {{-- Menu Task --}}
@@ -122,17 +123,6 @@
         
                 <div class="flex space-x-4">
                     <button id="addRow" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Add Row</button>
-        
-                    <div class="relative">
-                        <button id="addColumnDropdown" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">Add Column</button>
-                        <div id="columnTypeDropdown" class="hidden absolute left-0 mt-2 w-48 bg-white border border-gray-300 rounded shadow-lg">
-                            <button data-type="Text" class="w-full text-left px-4 py-2 hover:bg-gray-200">Text</button>
-                            <button data-type="Date" class="w-full text-left px-4 py-2 hover:bg-gray-200">Date</button>
-                            <button data-type="Dropdown" class="w-full text-left px-4 py-2 hover:bg-gray-200">Dropdown</button>
-                            <button data-type="Owner" class="w-full text-left px-4 py-2 hover:bg-gray-200">Owner</button>
-                            <button data-type="Files" class="w-full text-left px-4 py-2 hover:bg-gray-200">Files</button>
-                        </div>
-                    </div>
                 </div>
             </div> 
         </div>

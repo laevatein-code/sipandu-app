@@ -1,6 +1,8 @@
 $('input[name="dateRange"]').daterangepicker();
 
 document.getElementById('addRow').addEventListener('click', function() {
+    $('input[name="dateRange"]').daterangepicker();
+    
     const tableBody = document.getElementById('tableBody');
     const newRow = document.createElement('tr');
     const numColumns = document.querySelectorAll('#tableHeader th').length;
@@ -16,6 +18,8 @@ document.getElementById('addRow').addEventListener('click', function() {
         } else if (i === 3) {
             newCell.innerHTML = '<input type="text" name="dateRange" class="bg-white border border-gray-300 rounded px-2 py-1">';
         } else if (i === 4) {
+            newCell.innerHTML ='<input type="file" name="filesUpload" class="bg-white border border-gray-300 rounded px-2 py-1">';
+        } else if (i === 5) {
             newCell.innerHTML = '<button class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-700 delete-row">Delete</button>';
         } else {
             newCell.textContent = `New Data`;
@@ -27,77 +31,6 @@ document.getElementById('addRow').addEventListener('click', function() {
     attachCellClickHandler(newRow);
     attachDeleteRowHandler(newRow);
 });
-
-document.getElementById('addColumnDropdown').addEventListener('click', function() {
-    const dropdown = document.getElementById('columnTypeDropdown');
-    dropdown.classList.toggle('hidden');
-});
-
-document.getElementById('columnTypeDropdown').addEventListener('click', function(event) {
-    const columnType = event.target.getAttribute('data-type');
-    addColumn(columnType);
-    const dropdown = document.getElementById('columnTypeDropdown');
-    dropdown.classList.add('hidden');
-});
-
-function addColumn(type) {
-    const tableHeader = document.getElementById('tableHeader');
-    const tableBody = document.getElementById('tableBody');
-
-    const newHeader = document.createElement('th');
-    newHeader.className = 'p-2 border border-gray-300 cursor-pointer text-left';
-    newHeader.textContent = type;
-    tableHeader.appendChild(newHeader);
-
-    attachHeaderClickHandler(newHeader);
-
-    for (let row of tableBody.rows) {
-        const newCell = document.createElement('td');
-        newCell.className = 'p-2 border border-gray-300 editable-cell';
-        if (type === 'Text') {
-            newCell.textContent = `New Data`;
-        } else if (type === 'Date') {
-            newCell.innerHTML = '<input type="date" class="bg-white border border-gray-300 rounded px-2 py-1">';
-        } else if (type === 'Dropdown') {
-            newCell.innerHTML = '<select class="bg-white border border-gray-300 rounded px-2 py-1">' +
-                                '<option value="Option 1">Option 1</option>' +
-                                '<option value="Option 2">Option 2</option>' +
-                                '<option value="Option 3">Option 3</option>';
-        } else if (type === 'Owner') {
-            newCell.innerHTML = '<input type="text" class="bg-white border border-gray-300 rounded px-2 py-1" placeholder="Owner Name">';
-        } else if (type === 'Files') {
-            newCell.innerHTML = '<input type="file" class="bg-white border border-gray-300 rounded px-2 py-1" placeholder="Choose Files">';
-        }
-        row.appendChild(newCell);
-    }
-}
-
-function attachHeaderClickHandler(header) {
-    header.addEventListener('click', function() {
-        if (header.querySelector('input')) return;
-
-        const currentText = header.textContent;
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.value = currentText;
-        input.className = 'border rounded p-1';
-        header.textContent = '';
-        header.appendChild(input);
-        input.focus();
-
-        const finishEditing = () => {
-            const newText = input.value.trim() || currentText;
-            header.textContent = newText;
-        };
-
-        input.addEventListener('blur', finishEditing);
-        input.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                finishEditing();
-            }
-        });
-    });
-}
 
 function attachCellClickHandler(row) {
     row.querySelectorAll('.editable-cell').forEach(cell => {
@@ -136,7 +69,6 @@ function attachDeleteRowHandler(row) {
     });
 }
 
-document.querySelectorAll('#tableHeader th').forEach(attachHeaderClickHandler);
 document.querySelectorAll('#tableBody tr').forEach(row => {
     attachCellClickHandler(row);
     attachDeleteRowHandler(row);
