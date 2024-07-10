@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Item;
+use App\Models\Wokrspace;
 
 Route::get('/', function () {
-    return view('dashboard-ipds',['items' => Item::ipdsItems()]);
+    return view('dashboard-ipds',['items' => Item::ipdsItems(),'workspace' => Wokrspace::ipdsWorspace()]);
 });
 
 Route::get('/sosial', function () {
@@ -32,5 +33,5 @@ Route::get('/neraca', function () {
 });
 
 Route::get('/tata-usaha', function () {
-    return view('dashboard-tata-usaha',['items' => Item::tuItems()]);
+    return view('dashboard-tata-usaha',['items' => Item::tuItems(),'workspace' => Wokrspace::tuWorspace()]);
 });

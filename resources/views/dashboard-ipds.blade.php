@@ -44,7 +44,7 @@
         <div class="p-4 border-2 bg-gray-100 rounded-lg">
             {{-- Kepala Judul --}}
             <div class="pb-4">
-                <span class="text-4xl">IPDS</span>
+                <span class="text-4xl">{{ $items[0]['seksi']; }}</span>
             </div>
             {{-- Menu kontrol new task --}}
             <div class="flex space-x-2">
@@ -68,66 +68,115 @@
                     </div>
                 </div>
             </div> --}}
-            <div class="container mx-auto space-y-8" id="tablesContainer">
-                <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800 editable-cell">
-                    To Do
-                </caption>
-                <div class="overflow-x-auto mb-4">
-                    <table id="dynamicTable" class="min-w-full bg-white border border-gray-300 rounded-md shadow">
-                        <thead class="bg-gray-200">
-                            <tr id="tableHeader">
-                                <th class="p-2 border border-gray-300 cursor-pointer text-left">Nama Tugas</th>
-                                <th class="p-2 border border-gray-300 cursor-pointer text-left">Anggota</th>
-                                <th class="p-2 border border-gray-300 cursor-pointer text-left">Status</th>
-                                <th class="p-2 border border-gray-300 cursor-pointer text-left">Tenggat Waktu</th>
-                                <th class="p-2 border border-gray-300 cursor-pointer text-left">Files</th>
-                                <th class="p-2 border border-gray-300 cursor-pointer text-left">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tableBody">
-                            @foreach ($items as $item)  
-                            <tr>
-                                <td class="p-2 border border-gray-300 editable-cell">{{ $item['nama'] }}</td>
-                                <td class="p-2 border border-gray-300 editable-cell">{{ $item['jumlahAnggota'] }}</td>
-                                <td class="p-2 border border-gray-300 editable-cell">
-                                    <select class="bg-white border border-gray-300 rounded px-2 py-1">
-                                        @if ($item['status'] == "Not Started")
-                                            <option value="Not Started" selected="selected">Not Started</option>
-                                            <option value="In Progress">In Progress</option>
-                                            <option value="Completed">Completed</option>
-                                        @elseif ($item['status'] == "In Progress")
-                                            <option value="Not Started">Not Started</option>
-                                            <option value="In Progress" selected="selected">In Progress</option>
-                                            <option value="Completed">Completed</option>
-                                        @elseif ($item['status'] == "Completed")
-                                            <option value="Not Started">Not Started</option>
-                                            <option value="In Progress">In Progress</option>
-                                            <option value="Completed" selected="selected">Completed</option>
-                                        @endif
-                                    </select>
-                                </td>
-                                <td class="p-2 border border-gray-300 editable-cell">
-                                    <input type="text" name="dateRange" class="bg-white border border-gray-300 rounded px-2 py-1" value="{{ $item['dateEnd'] }}">
-                                </td>
-                                <td class="p-2 border border-gray-300 editable-cell">
-                                    <input type="file" name="filesUpload" class="bg-white border border-gray-300 rounded px-2 py-1">
-                                </td>
-                                <td class="p-2 border border-gray-300 text-center">
-                                    <button class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-700 delete-row">Delete</button>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-        
-                <div class="flex space-x-4">
-                    <button id="addRow" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Add Row</button>
-                </div>
-            </div> 
+            <div id="tableContainer">
+                @foreach ($workspace as $w)
+                <div class="container mx-auto space-y-8 py-4">
+                    <div class="pb-0 text-lg font-semibold text-left rtl:text-right text-gray-900">
+                        <p contenteditable="true">{{ $w['nama'] }}</p>
+                    </div>
+                    <div class="overflow-x-auto mb-4">
+                        <table id="dynamicTable" class="min-w-full bg-white border border-gray-300 rounded-md shadow">
+                            <thead class="bg-gray-200">
+                                <tr id="tableHeader-{{ $w['id'] }}">
+                                    <th class="p-2 border border-gray-300 cursor-pointer text-left">Nama Tugas</th>
+                                    <th class="p-2 border border-gray-300 cursor-pointer text-left">Anggota</th>
+                                    <th class="p-2 border border-gray-300 cursor-pointer text-left">Status</th>
+                                    <th class="p-2 border border-gray-300 cursor-pointer text-left">Tenggat Waktu</th>
+                                    <th class="p-2 border border-gray-300 cursor-pointer text-left">Files</th>
+                                    <th class="p-2 border border-gray-300 cursor-pointer text-left">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody-{{ $w['id'] }}">
+                                @foreach ($items as $item) 
+                                @if ($item['workspace'] === $w['id']) 
+                                <tr>
+                                    <td class="p-2 border border-gray-300 editable-cell">{{ $item['nama'] }}</td>
+                                    <td class="p-2 border border-gray-300 editable-cell">{{ $item['jumlahAnggota'] }}</td>
+                                    <td class="p-2 border border-gray-300 editable-cell">
+                                        <select class="bg-white border border-gray-300 rounded px-2 py-1">
+                                            @if ($item['status'] == "Not Started")
+                                                <option value="Not Started" selected="selected">Not Started</option>
+                                                <option value="In Progress">In Progress</option>
+                                                <option value="Completed">Completed</option>
+                                            @elseif ($item['status'] == "In Progress")
+                                                <option value="Not Started">Not Started</option>
+                                                <option value="In Progress" selected="selected">In Progress</option>
+                                                <option value="Completed">Completed</option>
+                                            @elseif ($item['status'] == "Completed")
+                                                <option value="Not Started">Not Started</option>
+                                                <option value="In Progress">In Progress</option>
+                                                <option value="Completed" selected="selected">Completed</option>
+                                            @endif
+                                        </select>
+                                    </td>
+                                    <td class="p-2 border border-gray-300 editable-cell">
+                                        <input type="text" name="dateRange" class="bg-white border border-gray-300 rounded px-2 py-1" value="{{ $item['dateEnd'] }}">
+                                    </td>
+                                    <td class="p-2 border border-gray-300 editable-cell">
+                                        <input type="file" name="filesUpload" class="bg-white border border-gray-300 rounded px-2 py-1">
+                                    </td>
+                                    <td class="p-2 border border-gray-300 text-center">
+                                        <button class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-700 delete-row">Delete</button>
+                                    </td>
+                                </tr>
+                                @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button id="addRow-{{ $w['id'] }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Add Row</button>
+                    </div>
+                </div> 
+                @endforeach
+            </div>
         </div>
     </main>
-    
     <script src="{{ 'js/style2.js' }}"></script>
+    <script>
+        @foreach ($workspace as $w)
+            document.getElementById('addRow-{{ $w['id'] }}').addEventListener('click', function() {
+                  
+                const tableBody = document.getElementById('tableBody-{{ $w['id'] }}');
+                const newRow = document.createElement('tr');
+                const numColumns = document.querySelectorAll('#tableHeader-{{ $w['id'] }} th').length;
+
+                for (let i = 0; i < numColumns; i++) {
+                    const newCell = document.createElement('td');
+                    newCell.className = 'p-2 border border-gray-300 editable-cell';
+                    if (i === 2) {
+                        newCell.innerHTML = '<select class="bg-white border border-gray-300 rounded px-2 py-1">' +
+                                            '<option value="Not Started">Not Started</option>' +
+                                            '<option value="In Progress">In Progress</option>' +
+                                            '<option value="Completed">Completed</option>';
+                    } else if (i === 3) {
+                        newCell.innerHTML = '<input type="text" name="dateRange" class="bg-white border border-gray-300 rounded px-2 py-1">';
+                    } else if (i === 4) {
+                        newCell.innerHTML ='<input type="file" name="filesUpload" class="bg-white border border-gray-300 rounded px-2 py-1">';
+                    } else if (i === 5) {
+                        newCell.className = 'p-2 border border-gray-300 editable-cell text-center';
+                        newCell.innerHTML = '<button class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-700 delete-row">Delete</button>';
+                    } else {
+                        newCell.textContent = `New Data`;
+                    }
+                    newRow.appendChild(newCell);
+                }
+
+                tableBody.appendChild(newRow);
+                attachCellClickHandler(newRow);
+                attachDeleteRowHandler(newRow);
+
+                $('input[name="dateRange"]').daterangepicker();
+            });
+            
+            document.querySelectorAll('#tableBody-{{ $w['id'] }} tr').forEach(row => {
+                attachCellClickHandler(row);
+                attachDeleteRowHandler(row);
+            });
+        @endforeach
+
+        
+    </script>
+    
 </div>
 <x-foot></x-foot>
