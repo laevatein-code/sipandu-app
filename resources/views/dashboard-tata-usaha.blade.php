@@ -44,7 +44,7 @@
         <div class="p-4 border-2 bg-gray-100 rounded-lg">
             {{-- Kepala Judul --}}
             <div class="pb-4">
-                <span class="text-4xl">{{ $items[0]['seksi']; }}</span>
+                <span class="text-4xl">{{ $workspace[0]->seksis->nama }}</span>
             </div>
             {{-- Menu kontrol new task --}}
             <div class="flex space-x-2">
@@ -72,7 +72,7 @@
                 @foreach ($workspace as $w)
                 <div class="container mx-auto space-y-8 py-4">
                     <div class="pb-0 text-lg font-semibold text-left rtl:text-right text-gray-900">
-                        <p contenteditable="true">{{ $w['nama'] }}</p>
+                        <p contenteditable="true" id="toDo-{{ $w['id'] }}">{{ $w['nama'] }}</p>
                     </div>
                     <div class="overflow-x-auto mb-4">
                         <table id="dynamicTable" class="min-w-full bg-white border border-gray-300 rounded-md shadow">
@@ -88,38 +88,42 @@
                             </thead>
                             <tbody id="tableBody-{{ $w['id'] }}">
                                 @foreach ($items as $item) 
-                                @if ($item['workspace'] === $w['id']) 
-                                <tr>
-                                    <td class="p-2 border border-gray-300 editable-cell">{{ $item['nama'] }}</td>
-                                    <td class="p-2 border border-gray-300 editable-cell">{{ $item['jumlahAnggota'] }}</td>
-                                    <td class="p-2 border border-gray-300 editable-cell">
-                                        <select class="bg-white border border-gray-300 rounded px-2 py-1">
-                                            @if ($item['status'] == "Not Started")
-                                                <option value="Not Started" selected="selected">Not Started</option>
-                                                <option value="In Progress">In Progress</option>
-                                                <option value="Completed">Completed</option>
-                                            @elseif ($item['status'] == "In Progress")
-                                                <option value="Not Started">Not Started</option>
-                                                <option value="In Progress" selected="selected">In Progress</option>
-                                                <option value="Completed">Completed</option>
-                                            @elseif ($item['status'] == "Completed")
-                                                <option value="Not Started">Not Started</option>
-                                                <option value="In Progress">In Progress</option>
-                                                <option value="Completed" selected="selected">Completed</option>
+                                    @if ($item->workspace_id === $w['id'])
+                                    <tr>
+                                        <td class="p-2 border border-gray-300 editable-cell">{{ $item->nama }}</td>
+                                        <td class="p-2 border border-gray-300 editable-cell">{{ $item->Anggota }}</td>
+                                        <td class="p-2 border border-gray-300 editable-cell">
+                                            <select class="bg-white border border-gray-300 rounded px-2 py-1">
+                                                @if ($item->status == "Not Started")
+                                                    <option value="Not Started" selected="selected">Not Started</option>
+                                                    <option value="In Progress">In Progress</option>
+                                                    <option value="Completed">Completed</option>
+                                                @elseif ($item->status == "In Progress")
+                                                    <option value="Not Started">Not Started</option>
+                                                    <option value="In Progress" selected="selected">In Progress</option>
+                                                    <option value="Completed">Completed</option>
+                                                @elseif ($item->status == "Completed")
+                                                    <option value="Not Started">Not Started</option>
+                                                    <option value="In Progress">In Progress</option>
+                                                    <option value="Completed" selected="selected">Completed</option>
+                                                @endif
+                                            </select>
+                                        </td>
+                                        <td class="p-2 border border-gray-300 editable-cell">
+                                            @if ($item->dateStart != null)
+                                            <input id="dueDate-{{ $item->id }}" type="text" name="dueDate" class="bg-white border border-gray-300 rounded px-2 py-1" value="">
+                                            @else
+                                            <input type="text" name="dateRange" class="bg-white border border-gray-300 rounded px-2 py-1" value="">
                                             @endif
-                                        </select>
-                                    </td>
-                                    <td class="p-2 border border-gray-300 editable-cell">
-                                        <input type="text" name="dateRange" class="bg-white border border-gray-300 rounded px-2 py-1" value="{{ $item['dateEnd'] }}">
-                                    </td>
-                                    <td class="p-2 border border-gray-300 editable-cell">
-                                        <input type="file" name="filesUpload" class="bg-white border border-gray-300 rounded px-2 py-1">
-                                    </td>
-                                    <td class="p-2 border border-gray-300 text-center">
-                                        <button class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-700 delete-row">Delete</button>
-                                    </td>
-                                </tr>
-                                @endif
+                                        </td>
+                                        <td class="p-2 border border-gray-300 editable-cell">
+                                            <input type="file" name="filesUpload" class="bg-white border border-gray-300 rounded px-2 py-1">
+                                        </td>
+                                        <td class="p-2 border border-gray-300 text-center">
+                                            <button class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-700 delete-row">Delete</button>
+                                        </td>
+                                    </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>
@@ -168,6 +172,12 @@
 
                 $('input[name="dateRange"]').daterangepicker();
             });
+
+            @foreach ($items as $item)
+                @if ($item->workspace_id === $w['id'])
+                    $('#dueDate-{{ $item->id }}').daterangepicker({startDate: '{{ $item->dateStart }}', endDate: '{{ $item->dateEnd }}'}); 
+                @endif
+            @endforeach
             
             document.querySelectorAll('#tableBody-{{ $w['id'] }} tr').forEach(row => {
                 attachCellClickHandler(row);
@@ -175,6 +185,10 @@
             });
         @endforeach
 
+        const datas = [];
+        @foreach ($items as $item)
+            datas.push('{{ $item->id }}');
+        @endforeach
         
     </script>
     

@@ -12,9 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('penggunas', function (Blueprint $table) {
-            $table->string("nip")->primary();
-            $table->string("nama");
-            $table->integer("seksi");
+            $table->id();
+            $table->foreignId('pengguna_id')->constrained(
+                table: 'anggota',
+                indexName: 'user_id'
+            );
+            $table->foreignId('seksi_id')->constrained(
+                table: 'seksi',
+                indexName: 'id_seksi'
+            );
             $table->string("status");
             $table->string("username");
             $table->string("password");

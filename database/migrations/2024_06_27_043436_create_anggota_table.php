@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('anggota', function (Blueprint $table) {
-            $table->string("NIP");
+            $table->id();
             $table->string("nama");
-            $table->integer("item");
             $table->timestamps();
         });
     }

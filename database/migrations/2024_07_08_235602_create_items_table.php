@@ -14,12 +14,15 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->char("id",4);
             $table->string("nama");
-            $table->string("jumlahAnggota");
+            $table->string("Anggota");
             $table->string("status");
             $table->date("dateStart");
             $table->date("dateEnd");
             $table->string("files");
-            $table->integer("workspace");
+            $table->foreignId('workspace_id')->constrained(
+                table:'workspace',
+                indexName:'w_id'
+            );
             $table->timestamps();
         });
     }

@@ -14,7 +14,14 @@ return new class extends Migration
         Schema::create('workspace', function (Blueprint $table) {
             $table->id();
             $table->string("nama");
-            $table->string("pembuat");
+            $table->foreignId('author_id')->constrained(
+                table:'anggota',
+                indexName:'NIP'
+            );
+            $table->foreignId('seksi_id')->constrained(
+                table:'seksi',
+                indexName:'id_seksi'
+            );
             $table->timestamps();
         });
     }
