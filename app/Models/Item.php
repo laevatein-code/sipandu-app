@@ -27,10 +27,9 @@ class Item extends Model {
     }
 
     public static function tuItems(){
-        $query = DB::table('items')->where('workspace_id',DB::table('workspace')->select('id')->where('seksi_id',6));
-        $items = $query->get();
-
-        return $items->toArray();
+        $items = DB::select('select * from items where(select id from workspace where seksi_id = 6)');
+        
+        return $items;
     }
 
     public static function produksiItem(){

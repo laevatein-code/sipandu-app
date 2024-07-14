@@ -44,7 +44,7 @@
         <div class="p-4 border-2 bg-gray-100 rounded-lg">
             {{-- Kepala Judul --}}
             <div class="pb-4">
-                <span class="text-4xl">{{ $workspace[0]->seksis->nama }}</span>
+                <span class="text-4xl">Tata Usaha</span>
             </div>
             {{-- Menu kontrol new task --}}
             <div class="flex space-x-2">

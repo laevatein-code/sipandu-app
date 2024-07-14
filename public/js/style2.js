@@ -5,13 +5,13 @@ document.getElementById("addTable").addEventListener('click', function(){
         document.getElementById('tableBody').prop;
         window.alert("Task terbaru belum disimpan");
     } catch (error) {
-        const container = document.getElementById('tableContainer');
+        const container = document.getElementById('formTask');
         const div1 = document.createElement('div');
         div1.className = 'container mx-auto space-y-8 py-4';
         const div2 = document.createElement('div');
         div2.className = 'pb-0 text-lg font-semibold text-left rtl:text-right text-gray-900';
         const p = document.createElement('p');
-        p.contentEditable = 'true';
+        p.className = 'editableTask';
         p.innerHTML = 'To Do';
         div2.appendChild(p);
 
@@ -26,6 +26,7 @@ document.getElementById("addTable").addEventListener('click', function(){
         const tombol = document.createElement('button');
         tombol.className = 'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700';
         tombol.id = 'addRow';
+        tombol.type = 'button';
         tombol.innerHTML = 'Add Row';
 
         div4.appendChild(tombol);
@@ -68,6 +69,8 @@ document.getElementById("addTable").addEventListener('click', function(){
             $('input[name="dateRange"]').daterangepicker();
         });
         
+        attachNameClickHandler(div2);
+
         $('input[name="dateRange"]').daterangepicker();
         document.querySelectorAll('#tableBody tr').forEach(row => {
             attachCellClickHandler(row);

@@ -1,4 +1,5 @@
 <x-head></x-head>
+<x-navbar></x-navbar>
 <div class="flex">
     <aside class="sticky h-screen top-0 pt-4 max-sm:hidden bg-gray-900 w-[300px]">
         <div class="text-gray-100 text-xl">
@@ -9,8 +10,7 @@
         </div>
         
         <div class="h-full pb-4 overflow-y-auto bg-gray-900">
-            <a href="/" class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
-               
+            <a href="/ipds" class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
                 <span class="text-[15px] ml-4 text-gray-200 font-bold">IPDS</span>
             </a>
             <a href="/sosial" class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
@@ -44,7 +44,7 @@
         <div class="p-4 border-2 bg-gray-100 rounded-lg">
             {{-- Kepala Judul --}}
             <div class="pb-4">
-                <span class="text-4xl">{{ $workspace[0]->seksis->nama }}</span>
+                <span class="text-4xl">IPDS</span>
             </div>
             {{-- Menu kontrol new task --}}
             <div class="flex space-x-2">
@@ -54,7 +54,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
                      </svg>
                 </button>
-                <button id="simpanData" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">Simpan</button>
+                
             </div>
             <hr class="h-px my-3 dark:bg-black bg-black border-0">
             {{-- Menu Task --}}
@@ -69,10 +69,12 @@
                 </div>
             </div> --}}
             <div id="tableContainer">
+                <form action="{{ route('ipds.store'); }}" method="POST">
+                <div id="formTask">
                 @foreach ($workspace as $w)
                 <div class="container mx-auto space-y-8 py-4">
-                    <div class="pb-0 text-lg font-semibold text-left rtl:text-right text-gray-900">
-                        <p contenteditable="true" id="toDo-{{ $w['id'] }}">{{ $w['nama'] }}</p>
+                    <div id="tugas" class="pb-0 text-lg font-semibold text-left rtl:text-right text-gray-900">
+                        <p class="editableTask" id="toDo-{{ $w['id'] }}">{{ $w['nama'] }}</p>
                     </div>
                     <div class="overflow-x-auto mb-4">
                         <table id="dynamicTable" class="min-w-full bg-white border border-gray-300 rounded-md shadow">
@@ -120,7 +122,15 @@
                                             <input type="file" name="filesUpload" class="bg-white border border-gray-300 rounded px-2 py-1">
                                         </td>
                                         <td class="p-2 border border-gray-300 text-center">
+                                            <button class="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-700 delete-row">Edit</button>
                                             <button class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-700 delete-row">Delete</button>
+                                            <button class="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-700">
+                                                @if ($item->is_upload != null)
+                                                {{ $item->is_upload }}
+                                                @else
+                                                Belum Upload
+                                                @endif
+                                            </button>
                                         </td>
                                     </tr>
                                     @endif
@@ -129,10 +139,14 @@
                         </table>
                     </div>
                     <div class="flex space-x-4">
-                        <button id="addRow-{{ $w['id'] }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Add Row</button>
+                        <button id="addRow-{{ $w['id'] }}" type="button" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Add Row</button>
                     </div>
                 </div> 
                 @endforeach
+                </div>
+                <hr class="h-px my-3 dark:bg-black bg-black border-0">
+                <button id="simpanData" type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">Simpan</button>
+                </form>
             </div>
         </div>
     </main>
@@ -185,11 +199,40 @@
             });
         @endforeach
 
-        const datas = [];
-        @foreach ($items as $item)
-            datas.push('{{ $item->id }}');
-        @endforeach
-        
+        function attachNameClickHandler(toDo) {
+            const task = toDo.querySelectorAll('.editableTask');
+            task.forEach(tugas => {
+                tugas.addEventListener('click', function() {
+                if (tugas.querySelector('input') || tugas.querySelector('select') || tugas.querySelector('button')) return;
+
+                const currentText = tugas.textContent;
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.name = 'nama';
+                input.value = currentText;
+                input.className = 'border rounded p-1';
+                tugas.textContent = '';
+                tugas.appendChild(input);
+                input.focus();
+
+                const finishEditing = () => {
+                    const newText = input.value.trim() || currentText;
+                    tugas.textContent = newText;
+                };
+
+                input.addEventListener('blur', finishEditing);
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        finishEditing();
+                    }
+                });
+            });
+            });
+            
+        }
+        document.querySelectorAll('#tugas').forEach(tugas2 =>{
+            attachNameClickHandler(tugas2); 
+        });
     </script>
     
 </div>

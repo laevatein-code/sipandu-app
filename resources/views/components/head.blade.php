@@ -14,4 +14,3 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
         <title>Dashboard</title>
     </head><body>
-        <x-navbar></x-navbar>
