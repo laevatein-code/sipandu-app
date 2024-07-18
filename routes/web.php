@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NeracaController;
 use App\Http\Controllers\ProduksiController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SosialController;
 use App\Http\Controllers\TuController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Item;
@@ -61,6 +62,14 @@ Route::get('/files/download/{id}', [ProduksiController::class, 'download']);
 Route::delete('/produksi/{id}/delete', [ProduksiController::class, 'deleteItems'])->name('produksi.deleteItems');
 Route::put('/produksi/{id}/editItem', [ProduksiController::class, 'updateItems'])->name('produksi.updateItems');
 Route::put('/produksi/{id}/upload', [ProduksiController::class, 'upload']);
+
+// Sosial
+Route::resource('/sosial', SosialController::class)->middleware('auth');
+Route::post('/sosial/{id}/create', [SosialController::class, 'storeItems']);
+Route::get('/files/download/{id}', [SosialController::class, 'download']);
+Route::delete('/sosial/{id}/delete', [SosialController::class, 'deleteItems'])->name('sosial.deleteItems');
+Route::put('/sosial/{id}/editItem', [SosialController::class, 'updateItems'])->name('sosial.updateItems');
+Route::put('/sosial/{id}/upload', [SosialController::class, 'upload']);
 
 // Auth
 Route::get('/', [LoginController::class, 'index'])->name('login')->middleware('guest');
