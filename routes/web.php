@@ -5,6 +5,7 @@ use App\Http\Controllers\DistribusiController;
 use App\Http\Controllers\IpdsController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NeracaController;
+use App\Http\Controllers\ProduksiController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TuController;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,14 @@ Route::get('/files/download/{id}', [NeracaController::class, 'download']);
 Route::delete('/neraca/{id}/delete', [NeracaController::class, 'deleteItems'])->name('neraca.deleteItems');
 Route::put('/neraca/{id}/editItem', [NeracaController::class, 'updateItems'])->name('neraca.updateItems');
 Route::put('/neraca/{id}/upload', [NeracaController::class, 'upload']);
+
+// Produksi
+Route::resource('/produksi', ProduksiController::class)->middleware('auth');
+Route::post('/produksi/{id}/create', [ProduksiController::class, 'storeItems']);
+Route::get('/files/download/{id}', [ProduksiController::class, 'download']);
+Route::delete('/produksi/{id}/delete', [ProduksiController::class, 'deleteItems'])->name('produksi.deleteItems');
+Route::put('/produksi/{id}/editItem', [ProduksiController::class, 'updateItems'])->name('produksi.updateItems');
+Route::put('/produksi/{id}/upload', [ProduksiController::class, 'upload']);
 
 // Auth
 Route::get('/', [LoginController::class, 'index'])->name('login')->middleware('guest');
