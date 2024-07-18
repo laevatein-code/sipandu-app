@@ -160,7 +160,7 @@
                             </thead>
                             <tbody id="tableBody-{{ $w['id'] }}">
                                 @foreach ($items as $item) 
-                                    @if ($item->workspace_id === $w['id'] && (auth()->user()->status == 'User' || $item->is_upload == 'Sudah Upload' || $item->is_upload == 'Disetujui'))
+                                    @if ($item->workspace_id === $w['id'] && (auth()->user()->status == 'User' || auth()->user()->seksi_id == 1 || $item->is_upload == 'Sudah Upload' || $item->is_upload == 'Disetujui'))
                                     <div>
                                         <tr>
                                             <td class="p-2 border border-gray-300 editable-cell">{{ $item->nama }}</td>
@@ -195,8 +195,8 @@
                                                 @endif
                                             </td>
                                             <td class="p-2 border border-gray-300 text-center justify-center">
-                                                <div class="flex">
-                                                    @if (auth()->user()->status == 'User')
+                                                <div class="flex justify-center">
+                                                    @if (auth()->user()->status == 'User' || auth()->user()->seksi_id == 1)
                                                     <div x-data="{isEdit{{ $item->id }}: false}">
                                                         <button @click="isEdit{{ $item->id }} = !isEdit{{ $item->id }}" class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-700">Edit</button>
                                                         <div x-show="isEdit{{ $item->id }}" :class="{'hidden': !isEdit{{ $item->id }}, 'block': isEdit{{ $item->id }} }" class="text-left backdrop-blur content-center flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -263,7 +263,7 @@
                                                     <form action="/ipds/{{ $item->id }}/upload" method="POST">
                                                         @csrf
                                                         @method('put')
-                                                        @if (auth()->user()->status == 'User')
+                                                        @if (auth()->user()->status == 'User' || auth()->user()->seksi_id == 1)
                                                             @if ($item->is_upload == 'Disetujui')
                                                             <button class="bg-green-500 text-white text-nowrap px-4 py-1 rounded hover:bg-green-700 size-fit" disabled>
                                                                 {{ $item->is_upload }}  
