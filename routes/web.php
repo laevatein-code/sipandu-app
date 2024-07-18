@@ -18,8 +18,16 @@ Route::get('/home', function(){
 
 Route::post('/logout', [LoginController::class, 'logout']);
 
+// IPDS
 Route::resource('/ipds', IpdsController::class)->middleware('auth');
+Route::post('/ipds/{id}/create', [IpdsController::class, 'storeItems']);
+Route::get('/files/download/{id}', [IpdsController::class, 'download']);
+Route::delete('/ipds/{id}/delete', [IpdsController::class, 'deleteItems'])->name('ipds.deleteItems');
+Route::put('/ipds/{id}/editItem', [IpdsController::class, 'updateItems'])->name('ipds.updateItems');
+Route::put('/ipds/{id}/upload', [IpdsController::class, 'upload']);
 
+
+// Auth
 Route::get('/', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/', [LoginController::class, 'auth']);
 

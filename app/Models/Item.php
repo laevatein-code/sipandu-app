@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
 
 class Item extends Model {
-    protected $fillable = ['nama','Anggota','status','dueDate','files','workspace_id'];
+    protected $fillable = ['nama','Anggota','status','dateStart','dateEnd','files','workspace_id','is_upload','fileNames'];
 
     public function konten(): BelongsTo
     {
@@ -19,10 +19,6 @@ class Item extends Model {
     public static function ipdsItems(){
         $items = DB::select('select * from items where(select id from workspace where seksi_id = 1)');
         
-        // $query = DB::table('items')
-        //     ->select(['*'])
-        //     ->where('workspace_id','=',Wokrspace::all(['id'])
-        //         ->where('seksi_id','=',1));
         return $items;
     }
 
@@ -33,25 +29,25 @@ class Item extends Model {
     }
 
     public static function produksiItem(){
-        $items = Item::where('seksi_id','Produksi')->get();
+        $items = DB::select('select * from items where(select id from workspace where seksi_id = 3)');
 
         return $items;
     }
 
     public static function sosialItem(){
-        $items = Item::where('seksi_id','Sosial')->get();
+        $items = DB::select('select * from items where(select id from workspace where seksi_id = 4)');
 
         return $items;
     }
 
     public static function distribusiItem(){
-        $items = Item::where('seksi_id','Distribusi')->get();
+        $items = DB::select('select * from items where(select id from workspace where seksi_id = 2)');
 
         return $items;
     }
 
     public static function neracaItem(){
-        $items = Item::where('seksi_id','Neraca')->get();
+        $items = DB::select('select * from items where(select id from workspace where seksi_id = 5)');
 
         return $items;
     }

@@ -23,11 +23,11 @@ class Wokrspace extends Model
 
     public function items(): HasMany
     {
-        return $this->hasMany(Item::class);
+        return $this->hasMany(Item::class, '');
     }
 
     protected $table = 'workspace';
-    protected $fillable = ['nama','author_id','seksi_id'];
+    protected $fillable = ['id','nama','author_id','seksi_id','created_at','updated_ad'];
 
     public static function ipdsWorspace(){
         $workspace = Wokrspace::where('seksi_id',1)->get();
@@ -37,6 +37,30 @@ class Wokrspace extends Model
 
     public static function tuWorspace(){
         $workspace = Wokrspace::where('seksi_id',6)->get();
+
+        return $workspace;
+    }
+
+    public static function distribusiWorkspace(){
+        $workspace = Wokrspace::where('seksi_id',1)->get();
+
+        return $workspace;
+    }
+
+    public static function sosialWorkspace(){
+        $workspace = Wokrspace::where('seksi_id',1)->get();
+
+        return $workspace;
+    }
+
+    public static function produksiWorkspace(){
+        $workspace = Wokrspace::where('seksi_id',1)->get();
+
+        return $workspace;
+    }
+
+    public static function neracaWorkspace(){
+        $workspace = Wokrspace::where('seksi_id',1)->get();
 
         return $workspace;
     }

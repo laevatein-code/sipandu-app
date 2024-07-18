@@ -16,7 +16,7 @@
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Login Page
                 </h1>
-                <form action="/" method="POST" class="space-y-4 md:space-y-6" action="#">
+                <form action="/" method="POST" class="space-y-4 md:space-y-6">
                     @csrf
                     <div>
                         <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
