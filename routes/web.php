@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DistribusiController;
 use App\Http\Controllers\IpdsController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -34,6 +35,14 @@ Route::get('/files/download/{id}', [TuController::class, 'download']);
 Route::delete('/tata-usaha/{id}/delete', [TuController::class, 'deleteItems'])->name('tata-usaha.deleteItems');
 Route::put('/tata-usaha/{id}/editItem', [TuController::class, 'updateItems'])->name('tata-usaha.updateItems');
 Route::put('/tata-usaha/{id}/upload', [TuController::class, 'upload']);
+
+// Distribusi
+Route::resource('/distribusi', DistribusiController::class)->middleware('auth');
+Route::post('/distribusi/{id}/create', [DistribusiController::class, 'storeItems']);
+Route::get('/files/download/{id}', [DistribusiController::class, 'download']);
+Route::delete('/distribusi/{id}/delete', [DistribusiController::class, 'deleteItems'])->name('distribusi.deleteItems');
+Route::put('/distribusi/{id}/editItem', [DistribusiController::class, 'updateItems'])->name('distribusi.updateItems');
+Route::put('/distribusi/{id}/upload', [DistribusiController::class, 'upload']);
 
 // Auth
 Route::get('/', [LoginController::class, 'index'])->name('login')->middleware('guest');

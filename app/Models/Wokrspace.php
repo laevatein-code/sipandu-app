@@ -42,25 +42,25 @@ class Wokrspace extends Model
     }
 
     public static function distribusiWorkspace(){
-        $workspace = Wokrspace::where('seksi_id',1)->get();
+        $workspace = Wokrspace::where('seksi_id',2)->get();
 
         return $workspace;
     }
 
     public static function sosialWorkspace(){
-        $workspace = Wokrspace::where('seksi_id',1)->get();
+        $workspace = Wokrspace::where('seksi_id',4)->get();
 
         return $workspace;
     }
 
     public static function produksiWorkspace(){
-        $workspace = Wokrspace::where('seksi_id',1)->get();
+        $workspace = Wokrspace::where('seksi_id',3)->get();
 
         return $workspace;
     }
 
     public static function neracaWorkspace(){
-        $workspace = Wokrspace::where('seksi_id',1)->get();
+        $workspace = Wokrspace::where('seksi_id',5)->get();
 
         return $workspace;
     }
