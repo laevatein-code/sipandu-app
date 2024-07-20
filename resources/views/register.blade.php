@@ -6,23 +6,24 @@
         <div class="card text-white" style="border-radius: 1rem; background-color: #1B1A55">
           <div class="card-body p-5 text-center">
             <div class="mb-md-5 mt-md-4 pb-5">
-              <form action="">
+              <form action="/register" method="POST">
+                @csrf
                 <h2 class="fw-bold mb-2 text-uppercase">Register Page</h2>
                 <p class="text-white-50 mb-5">Please enter your personal information</p>
                 <div class="form-floating mb-3 text-black-50">
-                  <input type="text" name="username" class="form-control" id="floatingInput" placeholder="Username">
+                  <input type="text" name="name" class="form-control" id="floatingInput" placeholder="Username" required>
                   <label for="floatingInput">Username</label>
                 </div>
                 <div class="form-floating mb-3 text-black-50">
-                  <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+                  <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" required>
                   <label for="floatingPassword">Password</label>
                 </div>
                 <div class="form-floating mb-3 text-black-50">
-                    <input type="email" name="email" class="form-control" id="floatingEmail" placeholder="Email">
+                    <input type="email" name="email" class="form-control" id="floatingEmail" placeholder="Email" required>
                     <label for="floatingEmail">Email</label>
                   </div>
                 <div class="form-floating mb-3 text-black-50">
-                    <input type="text" name="nip" class="form-control" id="floatingNip" placeholder="nip 9 angka">
+                    <input type="text" name="user_nip" class="form-control" id="floatingNip" placeholder="nip 9 angka" required>
                     <label for="floatingNip">NIP 9 digit</label>
                   </div>
                 <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg my-5 px-5 fw-bold text-uppercase" type="submit">Daftar</button>
