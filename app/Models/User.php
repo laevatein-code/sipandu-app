@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'user_nip',
         'password',
+        'status',
     ];
 
     /**
@@ -51,4 +52,6 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Member::class, 'user_nip');
     }
+
+
 }

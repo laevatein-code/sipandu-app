@@ -10,6 +10,8 @@ class Member extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['nama'];
+
     public function users(): HasOne
     {
         return $this->hasOne(User::class);

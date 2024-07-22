@@ -29,6 +29,10 @@
                                     <p class="block antialiased font-sans text-xl leading-relaxed text-blue-gray-900 font-bold uppercase">{{ auth()->user()->status }}</p>
                                     <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-500">Status</p>
                                 </div>
+                                <div class="mr-4 p-3 text-center">
+                                    <p class="block antialiased font-sans text-xl leading-relaxed text-blue-gray-900 font-bold uppercase">{{ auth()->user()->info->seksi }}</p>
+                                    <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-500">Seksi</p>
+                                </div>
                             </div>
                         </div>
                     </div>
