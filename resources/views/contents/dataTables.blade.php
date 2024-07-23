@@ -8,43 +8,32 @@
                 <p class="font-medium">Sipandu / Semua Tugas</p>
             </div>
             <div class="rounded-sm border shadow-sm bg-white px-5 pb-4 pt-6 sm:px-7 xl:pb-1">
-                <div class="max-w-full overflow-x-auto data-table data-table-container">
+                <div class="max-w-full overflow-x-auto data-table data-table-container mb-5">
                     <table class="w-full table-auto" id="dataTables">
                         <thead>
-                            <tr class=" bg-gray-200 text-left">
-                                <th class="min-w-[220px] px-4 py-4 font-medium text-black dark:text-white xl:pl-11">Nama</th>
-                                <th class="min-w-[220px] px-4 py-4 font-medium text-black dark:text-white xl:pl-11">Email</th>
-                                <th class="min-w-[220px] px-4 py-4 font-medium text-black dark:text-white xl:pl-11">Username</th>
+                            <tr class="bg-gray-200 text-left">
+                                <th class="min-w-[220px] px-4 py-4 font-medium text-black dark:text-white xl:pl-11">Nama Tugas</th>
+                                <th class="min-w-[220px] px-4 py-4 font-medium text-black dark:text-white xl:pl-11">Nama Petugas</th>
                                 <th class="min-w-[220px] px-4 py-4 font-medium text-black dark:text-white xl:pl-11">Status</th>
-                                <th class="min-w-[220px] px-4 py-4 font-medium text-black dark:text-white xl:pl-11">Seksi</th>
-                                <th class="min-w-[220px] px-4 py-4 font-medium text-black dark:text-white xl:pl-11">Action</th>
+                                <th class="min-w-[220px] px-4 py-4 font-medium text-black dark:text-white xl:pl-11">Tenggat Waktu</th>
+                                <th class="min-w-[220px] px-4 py-4 font-medium text-black dark:text-white xl:pl-11">File Upload</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($items as $item)
                             <tr>
-                                <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11"></td>
-                                <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11"></td>
-                                <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11"></td>
-                                <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11"></td>
-                                <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11"></td>
+                                <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">{{ $item->nama }}</td>
+                                <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">{{ $item->petugas }}</td>
+                                <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">{{ $item->progress }}</td>
+                                <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11" id="countdown{{ $item->id }}"></td>
                                 <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">
-                                    <div class="flex items-center space-x-3.5">
-                                        <a href="/contents/users/edit"><button type="button" class="hover:text-blue-700">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
-                                                <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z" />
-                                              </svg>                                              
-                                        </button></a>
-                                        <form action="/contents/users/" method="POST">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" onclick="return confirm('User akan dihapus?')" class="hover:text-blue-700">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
-                                                    <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clip-rule="evenodd" />
-                                                </svg>
-                                            </button>
-                                        </form>
-                                    </div>
+                                    @if ($item->namaFile == null)
+                                        Belum Upload
+                                    @else
+                                        <a href="/files/download/{{ $item->id }}">
+                                            <button class="inline-flex rounded bg-blue-700 px-3 py-1 font-medium text-white hover:bg-opacity-90 sm:px-6 sm:py-2.5">Download</button>
+                                        </a>  
+                                    @endif
                                 </td>
                             </tr>    
                             @endforeach
@@ -64,8 +53,38 @@
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.tailwindcss.com/"></script>
 <script src="https://cdn.datatables.net/2.1.0/js/dataTables.tailwindcss.js"></script>
-<script src="https://cdn.tailwindcss.com/"></script>
 <script>
     $('#dataTables').DataTable();
+
+    @foreach ($items as $item)
+        
+    document.addEventListener('DOMContentLoaded', function () {
+        const latestUploadDate = new Date('{{ $item->waktuSelesai }}');
+        const targetDate = new Date(latestUploadDate.getFullYear(), latestUploadDate.getMonth(), latestUploadDate.getDate() + 1); // Hitung mundur ke hari berikutnya
+        const countdownElement = document.getElementById('countdown{{ $item->id }}');
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownElement.innerHTML = days + "Hari " + hours + "Jam " +
+                minutes + "Menit " + seconds + "Detik ";
+
+            if (distance < 0) {
+                clearInterval(interval);
+                countdownElement.innerHTML = "EXPIRED";
+            }
+        }
+
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+    });
+
+    @endforeach
 </script>
 <x-foot></x-foot>

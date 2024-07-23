@@ -59,7 +59,9 @@
                                             @if ($item->namaFile == null)
                                                 Belum Upload
                                             @else
-                                                <a href="/files/download/{{ $item->id }}">Download</a>  
+                                                <a href="/files/download/{{ $item->id }}">
+                                                    <button class="inline-flex rounded bg-blue-700 px-3 py-1 font-medium text-white hover:bg-opacity-90 sm:px-6 sm:py-2.5">Download</button>
+                                                </a>  
                                             @endif
                                         </td>
                                         <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">{{ $item->progress }}</td>

@@ -19,6 +19,7 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css">
         <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.1.0/css/dataTables.dataTables.css">
         <style>
             #map {
             height: 500px;
