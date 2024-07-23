@@ -15,13 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->foreignId('w_id')->constrained(
-                table: 'wroskpaces',
+                table: 'workspaces',
                 indexName: 'workspaceId'
             );
-            $table->foreignId('petugas')->constrained(
-                table: 'workspaceMembers',
-                indexName: 'anggota'
-            );
+            $table->string('petugas');
             $table->text('keterangan');
             $table->date('waktuMulai');
             $table->date('waktuSelesai');

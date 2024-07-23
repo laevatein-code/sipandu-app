@@ -10,7 +10,7 @@ class Workspace extends Model
 {
     use HasFactory;
 
-    protected $guard = ['id'];
+    protected $guarded = ['id'];
 
     public function seksi(): BelongsTo
     {

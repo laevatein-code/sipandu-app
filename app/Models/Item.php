@@ -10,7 +10,7 @@ class Item extends Model
 {
     use HasFactory;
 
-    protected $guard = ['id'];
+    protected $guarded = ['id'];
 
     public function workspace(): BelongsTo
     {
