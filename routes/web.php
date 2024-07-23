@@ -56,3 +56,8 @@ Route::get('files/download/{id}', [Management::class, 'download']);
 
 // Datatables
 Route::get('/contents/semuaTugas', [AllTasks::class, 'index']);
+
+// Workspaces
+Route::put('/contents/workspaces/progress/{id}', [Workspace::class, 'updateProgress'])->name('workspace.submit');
+Route::get('/contents/workspaces/upload/{id}', [Workspace::class, 'editFile']);
+Route::put('/contents/workspaces/file/{id}', [Workspace::class, 'updateFile']);

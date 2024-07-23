@@ -23,7 +23,7 @@
                </div>
                <hr>
                <div class="p-4 md:p-6 xl:p-7">
-                  <canvas id="chartBar"></canvas>
+                  <canvas id="chartBar" class="mt-10"></canvas>
                </div>
             </div>
             <div class="col-span-12">
@@ -53,10 +53,10 @@
 
    // Barchart
    const data = {
-      labels: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
+      labels: ['IPDS','Tata Usaha','Sosial','Distribusi','Produksi','Neraca'],
       datasets: [{
-        label: 'Sample Data',
-        data: [30, 80, 45, 60, 20, 90, 55],
+        label: 'Task setiap seksi',
+        data: [{{ count($ipds) }}, {{ count($tataUsaha) }}, {{ count($sosial) }}, {{ count($distribusi) }}, {{ count($produksi) }}, {{ count($neraca) }}],
         backgroundColor: 'rgba(54, 162, 235, 0.6)',
         borderColor: 'rgba(54, 162, 235, 1)',
         borderWidth: 1
@@ -92,27 +92,19 @@
 
     // Pie Chart
     const data2 = {
-      labels: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
+      labels: ['Belum Mulai','In Progress','Completed'],
       datasets: [{
         label: 'Sample Data',
-        data: [30, 80, 45, 60, 20, 90, 55],
+        data: [{{ $item_bM->count()}},{{ $item_iP->count()}}, {{ $item_C->count()}}],
         backgroundColor: [
           'rgba(255, 99, 132, 0.6)',
           'rgba(54, 162, 235, 0.6)',
           'rgba(255, 206, 86, 0.6)',
-          'rgba(75, 192, 192, 0.6)',
-          'rgba(153, 102, 255, 0.6)',
-          'rgba(255, 159, 64, 0.6)',
-          'rgba(199, 199, 199, 0.6)'
         ],
         borderColor: [
           'rgba(255, 99, 132, 1)',
           'rgba(54, 162, 235, 1)',
           'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-          'rgba(199, 199, 199, 1)'
         ],
         borderWidth: 1
       }]

@@ -53,7 +53,7 @@
                                         <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">{{ $w->nama }}</td>
                                         <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">{{ $w->keterangan }}</td>
                                         <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">
-                                            <ul class="space-y-4 text-gray-500 list-none list-inside dark:text-gray-400">
+                                            <ul class="space-y-4 text-gray-500 list-none list-inside dark:text-gray-400" style="max-height: 100px; overflow-y: auto;">
                                             @foreach ($anggota as $a)
                                                 @if ($a->w_id == $w->id)
                                                     <li>{{ $a->w_anggota }}</li>
@@ -111,7 +111,7 @@
                                         <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">{{ $w->nama }}</td>
                                         <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">{{ $w->keterangan }}</td>
                                         <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">
-                                            <ul class="space-y-4 text-gray-500 list-none list-inside dark:text-gray-400">
+                                            <ul class="space-y-4 text-gray-500 list-none list-inside dark:text-gray-400" style="max-height: 100px; overflow-y: auto;">
                                                 @foreach ($anggota as $a)
                                                     @if ($a->w_id == $w->id)
                                                         <li>{{ $a->w_anggota }}</li>
