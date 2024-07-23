@@ -12,7 +12,7 @@
                     <div class="border-b border-stroke px-6 py-4 dark:border-strokedark">
                         <h3 class="font-medium text-xl text-black dark:text-white">Masukan data items</h3>
                     </div>
-                    <form action="/modal/items/{{ $id_w }}" method="POST">
+                    <form action="/modal/items/{{ $id_w }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <div class="p-6">
@@ -33,7 +33,7 @@
                                 <input type="text" name="anggota" placeholder="Masukan nama petugas" class="w-full rounded border-[1.5px] bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-blue-700 active:border-blue-700 disabled:cursor-default disabled:bg-white dark:text-white dark:focus:border-blue-700" required>
                             </div>
                             <div class="mb-4">
-                                <label for="upload" class="mb-3 block text-sm font-medium text-black dark:text-white">Masukan petugas</label>
+                                <label for="upload" class="mb-3 block text-sm font-medium text-black dark:text-white">Masukan file</label>
                                 <input type="file" name="upload" placeholder="choose file" class="w-full cursor-pointer rounded-lg border-[1.5px] bg-transparent font-normal outline-none transition file:mr-5 file:border-collapse file:cursor-pointer file:border-0 file:border-r file:border-solid file:bg-white file:px-5 file:py-3 file:hover:bg-blue-700 file:hover:bg-opacity-10 focus:border-blue-700 active:border-blue-700 disabled:cursor-default disabled:bg-white dark:file:bg-white/30 dark:file:text-white dark:focus:border-blue-700">
                             </div>
                             <button class="mt-10 flex w-full justify-center rounded bg-blue-700 p-3 font-medium text-white hover:bg-opacity-90">SIMPAN</button>

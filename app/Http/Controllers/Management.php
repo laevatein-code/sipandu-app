@@ -9,6 +9,7 @@ use App\Models\WorkspaceMember;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -141,8 +142,8 @@ class Management extends Controller
             $tags[] = $tag['value'];
         }
 
-        if($request->file('file') != null){
-            $file = $request->file('file');
+        if($request->file('upload') != null){
+            $file = $request->file('upload');
             $fileName = time() . '_' . $file->getClientOriginalName();
             $filePath = $file->storeAs('uploads', $fileName, 'public');
 
@@ -181,6 +182,10 @@ class Management extends Controller
     {
         DB::statement('PRAGMA foreign_keys = OFF');
 
+        if(Storage::exists('public/uploads/'.Item::findOrFail($post)->namaFile)){
+            Storage::delete('public/uploads/'.Item::findOrFail($post)->namaFile);
+        }
+
         Item::destroy($post);
 
         DB::statement('PRAGMA foreign_keys = ON');
@@ -215,10 +220,14 @@ class Management extends Controller
             $tags[] = $tag['value'];
         }
 
-        if($request->file('file') != null){
-            $file = $request->file('file');
+        if($request->file('upload') != null){
+            $file = $request->file('upload');
             $fileName = time() . '_' . $file->getClientOriginalName();
             $filePath = $file->storeAs('uploads', $fileName, 'public');
+
+            if(Storage::exists('public/uploads/'.$item->namaFile)){
+                Storage::delete('public/uploads/'.$item->namaFile);
+            }
 
             list($startDate, $endDate) = explode(' - ', $request->dateRange);
 
@@ -246,5 +255,11 @@ class Management extends Controller
         }
 
         return redirect('contents/items/'.$item->w_id)->with('success', 'Berhasil mengupdate item');
+    }
+
+    public function download($id){
+        $file = Item::findOrFail($id);
+
+        return Storage::download('public/uploads/'.$file->namaFile);
     }
 }

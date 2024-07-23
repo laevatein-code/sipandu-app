@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\allTasks;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\Management;
@@ -51,3 +52,7 @@ Route::put('modal/items/{id}', [Management::class, 'createItems']);
 Route::delete('contents/item/hapus/{id}', [Management::class, 'hapusItem']);
 Route::get('contents/items/edit/{id}', [Management::class, 'editItem']);
 Route::put('modal/items/update/{id}',[Management::class, 'updateItem']);
+Route::get('files/download/{id}', [Management::class, 'download']);
+
+// Datatables
+Route::get('/contents/semuaTugas', [AllTasks::class, 'index']);
