@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\allTasks;
+use App\Http\Controllers\AllTasks;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\Management;

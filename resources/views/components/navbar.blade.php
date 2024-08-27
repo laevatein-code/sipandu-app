@@ -21,7 +21,7 @@
                     {{ auth()->user()->name }}
                     </button>
                 </div>
-                <div x-show="profileToggle" :class="{'hidden': !profileToggle, 'block': profileToggle}" class="absolute right-1.5 z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
+                <div x-show="profileToggle" :class="{'hidden': !profileToggle, 'block': profileToggle}" x-cloak class="absolute right-1.5 z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
                     <div class="px-4 py-3" role="none">
                     <p class="text-sm text-gray-900 dark:text-white" role="none">
                         {{ auth()->user()->info->nama }}
@@ -45,7 +45,7 @@
                 </div>
             </div>
         </div>
-        <div x-show="sidebarMenu" :class="{'hidden': !sidebarMenu, 'block': sidebarMenu}" class="mt-4">
+        <div x-show="sidebarMenu" :class="{'hidden': !sidebarMenu, 'block': sidebarMenu}" x-cloak class="mt-4">
             <ul class="space-y-2 font-medium">
                 <li>
                      <a href="/contents/dashboard" class="flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group hover:text-gray-900">
