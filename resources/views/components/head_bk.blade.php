@@ -52,7 +52,7 @@
             }
 
             [x-cloak] { display: none; }
-
+            
         </style>
         <title>Dashboard</title>
     </head>

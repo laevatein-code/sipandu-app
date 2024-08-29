@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AllTasks;
+use App\Http\Controllers\BebanKerja;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\Management;
@@ -61,3 +62,6 @@ Route::get('/contents/semuaTugas', [AllTasks::class, 'index']);
 Route::put('/contents/workspaces/progress/{id}', [Workspace::class, 'updateProgress'])->name('workspace.submit');
 Route::get('/contents/workspaces/upload/{id}', [Workspace::class, 'editFile']);
 Route::put('/contents/workspaces/file/{id}', [Workspace::class, 'updateFile']);
+
+// BebanKerja
+Route::get('/contents/bebanKerja/', [BebanKerja::class, 'index']);
